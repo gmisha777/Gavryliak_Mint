@@ -49,7 +49,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                     Intent intent_main_activity=new Intent(this,WelcomeActivity.class);
                     intent_main_activity.putExtra(ID, login_txt);
                     startActivity(intent_main_activity);}else
-                    {toast = Toast.makeText(getApplicationContext(),code_pass+ "Password uncorrect!!!" +pass_txt,                         Toast.LENGTH_SHORT);
+                    {toast = Toast.makeText(getApplicationContext(),code_pass+ "Password uncorrect!!!!!" +pass_txt,                         Toast.LENGTH_SHORT);
                     toast.show(); }
                 }else{toast = Toast.makeText(getApplicationContext(),"Login not found!!!", Toast.LENGTH_SHORT);
                     toast.show(); }
