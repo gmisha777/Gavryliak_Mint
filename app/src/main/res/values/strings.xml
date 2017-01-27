@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Gavryliak_Mint</string>
+    <string name="title_activity_welcome_">Welcome_Activity</string>
+    <string name="title_activity_registration_">Registration_Activity</string>
 </resources>
