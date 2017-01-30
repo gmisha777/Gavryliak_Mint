@@ -31,9 +31,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
+
                 }
             });
             textView = (TextView) v.findViewById(R.id.textView);
+
         }
 
         public TextView getTextView() {

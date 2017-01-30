@@ -9,15 +9,16 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.EditText;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 
-public class CustomDialogFragment extends DialogFragment implements
+public class AddDialogFragment extends DialogFragment implements
         DialogInterface.OnClickListener {
     private View form=null;
-    private final static String REFFRAG="reffrag";
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

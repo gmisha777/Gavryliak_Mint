@@ -41,8 +41,8 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.btn_Login:
 
-                Intent intent_welcome_activity_temp=new Intent(this,Welcome_Activity.class);
-                startActivity(intent_welcome_activity_temp);
+//                Intent intent_welcome_activity_temp=new Intent(this,Welcome_Activity.class);
+//                startActivity(intent_welcome_activity_temp);
 
                 MyApp app = ((MyApp) getApplicationContext());
                 if (app.getMySPREF().contains(login_txt)){

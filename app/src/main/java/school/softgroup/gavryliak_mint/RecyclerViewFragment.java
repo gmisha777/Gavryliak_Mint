@@ -103,7 +103,6 @@ public class RecyclerViewFragment extends Fragment {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-
     private void initDataset() {
 
         gson =new Gson();
