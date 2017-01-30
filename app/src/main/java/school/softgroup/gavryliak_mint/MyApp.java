@@ -16,7 +16,7 @@ public class MyApp extends Application {
         sPref=getSharedPreferences(LOGIN_PASS,MODE_PRIVATE);
     }
 
-    public SharedPreferences getMyVariable() {
+    public SharedPreferences getMySPREF() {
         return sPref=getSharedPreferences(LOGIN_PASS,MODE_PRIVATE);
     }
 

@@ -45,8 +45,8 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 startActivity(intent_welcome_activity_temp);
 
                 MyApp app = ((MyApp) getApplicationContext());
-                if (app.getMyVariable().contains(login_txt)){
-                    code_pass=new String( Base64.decode(app.getMyVariable().getString(login_txt,""), Base64.DEFAULT ));
+                if (app.getMySPREF().contains(login_txt)){
+                    code_pass=new String( Base64.decode(app.getMySPREF().getString(login_txt,""), Base64.DEFAULT ));
                     if (code_pass.equals(pass_txt)){
                         Intent intent_welcome_activity=new Intent(this,Welcome_Activity.class);
                         intent_welcome_activity.putExtra(ID, login_txt);

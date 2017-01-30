@@ -38,8 +38,8 @@ public class Registration_Activity extends AppCompatActivity implements View.OnC
         repass=reinputPass.getText().toString();
         MyApp app = ((MyApp) getApplicationContext());
             if (check_Login(login)&&check_Pass(password,repass)){
-                if (!app.getMyVariable().contains(login)){
-                    SharedPreferences.Editor ed = app.getMyVariable().edit();
+                if (!app.getMySPREF().contains(login)){
+                    SharedPreferences.Editor ed = app.getMySPREF().edit();
                     code_pass= Base64.encodeToString(password.getBytes(), Base64.DEFAULT );
                     ed.putString(login, String.valueOf(code_pass));
                     ed.commit();
