@@ -18,7 +18,6 @@ public class AddDialogFragment extends DialogFragment implements
         DialogInterface.OnClickListener {
     private View form=null;
 
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
