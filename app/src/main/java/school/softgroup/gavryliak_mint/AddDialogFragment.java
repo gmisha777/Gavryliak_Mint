@@ -9,7 +9,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.view.ContextMenu;
 import android.view.View;
 import android.widget.EditText;
 import com.google.gson.Gson;
@@ -40,7 +39,7 @@ public class AddDialogFragment extends DialogFragment implements
         String temp_str_gson;
         MyApp app=((MyApp) getActivity().getApplicationContext());
         ArrayList<String> mDataset= gson.fromJson(app.getMySPREF().getString(JSON_OBJ,""),ArrayList.class);
-        mDataset.add(fruit_name);
+        mDataset.add(0,fruit_name);
         temp_str_gson=gson.toJson(mDataset);
         app.getMySPREF().edit().putString(JSON_OBJ,temp_str_gson).commit();
 
@@ -52,5 +51,11 @@ public class AddDialogFragment extends DialogFragment implements
     @Override
     public void onCancel(DialogInterface unused) {
         super.onCancel(unused);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        getActivity().recreate();
     }
 }
