@@ -1,0 +1,17 @@
+#
+# generated on 2017/02/02 11:18:07
+#
+# --table-start--
+dataClass=school.softgroup.gavryliak_mint.Fruits_Table
+tableName=fruits_table
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

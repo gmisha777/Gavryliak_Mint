@@ -6,4 +6,6 @@
     <string name="grid_layout_manager">Grid Layout Manager</string>
     <string name="linear_layout_manager">Linear Layout Manager</string>
     <string name="action_search">Search</string>
+    <string name="txt_login">Login</string>
+    <string name="txt_registration">Registration</string>
 </resources>

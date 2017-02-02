@@ -4,15 +4,22 @@ package school.softgroup.gavryliak_mint;
  * Created by GMisha on 29.01.2017.
  */
 
+import android.database.SQLException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.google.gson.Gson;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecyclerViewFragment extends Fragment {
 
@@ -45,7 +52,11 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        initDataset();
+        try {
+            initDataset();
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
         View rootView = inflater.inflate(R.layout.recycler_view_frag, container, false);
         rootView.setTag(TAG);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -103,15 +114,46 @@ public class RecyclerViewFragment extends Fragment {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    private void initDataset() {
+//    private void initDataset() {
+//
+//        gson =new Gson();
+//        String temp_str_gson;
+//        app=((MyApp) getActivity().getApplicationContext());
+//        if (!app.getMySPREF().contains(JSON_OBJ)){
+//            temp_str_gson=gson.toJson(default_list_fruits);
+//            app.getMySPREF().edit().putString(JSON_OBJ,temp_str_gson).commit();
+//            }
+//        mDataset= gson.fromJson(app.getMySPREF().getString(JSON_OBJ,""),String[].class);
+//
+//        try {
+//
+//            testOutOrmLiteDatabase();
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } catch (java.sql.SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+    private void initDataset() throws SQLException, java.sql.SQLException {
+        TodoOpenDatabaseHelper todoOpenDatabaseHelper = OpenHelperManager.getHelper(getContext(),
+                TodoOpenDatabaseHelper.class);
 
-        gson =new Gson();
-        String temp_str_gson;
-        app=((MyApp) getActivity().getApplicationContext());
-        if (!app.getMySPREF().contains(JSON_OBJ)){
-            temp_str_gson=gson.toJson(default_list_fruits);
-            app.getMySPREF().edit().putString(JSON_OBJ,temp_str_gson).commit();
-            }
-        mDataset= gson.fromJson(app.getMySPREF().getString(JSON_OBJ,""),String[].class);
+        Dao<Fruits_Table, Long> todoDao = todoOpenDatabaseHelper.getDao();
+//        todoDao.create(new Fruits_Table("Fruit Example 1"));
+//        todoDao.create(new Fruits_Table("Fruit Example 2"));
+//        todoDao.create(new Fruits_Table("Fruit Example 3"));
+
+        List<Fruits_Table> fruits_list = todoDao.queryForAll();
+        mDataset=new  String[fruits_list.size()];
+        int i=0;
+        for (Fruits_Table o:fruits_list){
+            mDataset[i]=o.name;
+            Log.d("MyStr",o.toString());
+            i++;
         }
+
+    }
+
 }
