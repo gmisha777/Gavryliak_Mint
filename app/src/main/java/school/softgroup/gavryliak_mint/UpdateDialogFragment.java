@@ -1,7 +1,7 @@
 package school.softgroup.gavryliak_mint;
 
 /**
- * Created by GMisha on 30.01.2017.
+ * Created by GMisha on 06.02.2017.
  */
 
 import android.app.AlertDialog;
@@ -14,9 +14,14 @@ import android.view.View;
 import android.widget.EditText;
 import java.util.UUID;
 import io.realm.Realm;
-public class AddDialogFragment extends DialogFragment implements
+public class UpdateDialogFragment extends DialogFragment implements
         DialogInterface.OnClickListener {
     private View form=null;
+    private Fruits_realM myList;
+    EditText fruit_edit;
+    public UpdateDialogFragment(Fruits_realM myList) {
+        this.myList = myList;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -24,23 +29,29 @@ public class AddDialogFragment extends DialogFragment implements
         form= getActivity().getLayoutInflater()
                 .inflate(R.layout.additem_layout, null);
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-        return(builder.setTitle("Add Fruit").setView(form)
+        return(builder.setTitle("Update Fruit").setView(form)
                 .setPositiveButton(android.R.string.ok, this)
                 .setNegativeButton(android.R.string.cancel, null).create());
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        fruit_edit=(EditText)form.findViewById(R.id.fruit_name);
+        fruit_edit.setText(myList.getFruit_name());
+
+    }
+
     @Override
     public void onClick(DialogInterface dialog, int which) {
 
-       EditText fruit_edit=(EditText)form.findViewById(R.id.fruit_name);
-       String fruit_name  = fruit_edit.getText().toString();
+        String fruit_name  = fruit_edit.getText().toString();
         Realm realm = Realm.getInstance(MyApp.getInstance());
         realm.beginTransaction();
-        Fruits_realM u = realm.createObject(Fruits_realM.class);
-        u.setId(UUID.randomUUID().toString());
-        u.setFruit_name(fruit_name);
+        Fruits_realM fruitdel =myList;
+        fruitdel.setFruit_name(fruit_name);
         realm.commitTransaction();
         MyApp.getInstance().getmAdapter().notifyDataSetChanged();
-
     }
     @Override
     public void onDismiss(DialogInterface unused) {
@@ -54,6 +65,6 @@ public class AddDialogFragment extends DialogFragment implements
     @Override
     public void onStop() {
         super.onStop();
-      // getActivity().recreate();
+        // getActivity().recreate();
     }
 }

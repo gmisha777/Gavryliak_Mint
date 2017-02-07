@@ -5,7 +5,19 @@
     <item
         android:icon="@drawable/ic_search_black_24dp"
         android:id="@+id/action_search"
-        android:orderInCategory="6"
+        android:orderInCategory="1"
         android:title="@string/action_search"
-        app:showAsAction="always" />
+        app:showAsAction="always">
+    </item>
+    <item  android:icon="@drawable/ic_more_vert_black_24dp"
+        android:id="@+id/settings"
+        android:orderInCategory="2"
+        android:title="@string/settings"
+        app:showAsAction="always">
+        <menu>
+            <item android:id="@+id/log_out"
+              android:title="@string/log_out"/>
+        </menu>
+        </item>
+
 </menu>

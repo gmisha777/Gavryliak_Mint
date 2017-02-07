@@ -103,6 +103,22 @@
                android:layout_weight="1"
                android:layout_marginTop="20dp"/>
             </LinearLayout>
+            <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/error_registration_txt"
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:textSize="@dimen/txt_login_size"
+                    android:visibility="invisible"
+                    android:layout_gravity="left"
+                    android:textColor="@color/red"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

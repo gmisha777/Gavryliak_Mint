@@ -1,5 +1,7 @@
 package school.softgroup.gavryliak_mint;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+
 public class Welcome_Activity extends AppCompatActivity {
 
+    public static final String CURRENT_USER = "current_user";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,18 +23,14 @@ public class Welcome_Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setImageResource(R.drawable.ic_add_black_24dp);
-
+        MyApp.getInstance().setFm(getSupportFragmentManager());
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-               //         .setAction("Action", null).show();
-                new AddDialogFragment().show(getSupportFragmentManager(),
+                new AddDialogFragment().show(MyApp.getInstance().getFm(),
                         "fruit_add");
             }
         });
-
     }
 
     @Override
@@ -46,7 +46,16 @@ public class Welcome_Activity extends AppCompatActivity {
             case R.id.action_search:
                 Toast.makeText(getApplicationContext(), R.string.action_search,Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.log_out:
+               if (MyApp.getInstance().getMySPREF().contains(CURRENT_USER)){
+                    SharedPreferences.Editor editor = MyApp.getInstance().getMySPREF().edit();
+                    editor.remove(CURRENT_USER);
+                    editor.apply();
+                    Intent intent=new Intent(this,Login_Activity.class);
+                    startActivity(intent);}
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

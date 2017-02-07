@@ -8,4 +8,8 @@
     <string name="action_search">Search</string>
     <string name="txt_login">Login</string>
     <string name="txt_registration">Registration</string>
+    <string name="create_new">create new</string>
+    <string name="open">open</string>
+    <string name="settings">welcome_settings</string>
+    <string name="log_out">Log Out</string>
 </resources>

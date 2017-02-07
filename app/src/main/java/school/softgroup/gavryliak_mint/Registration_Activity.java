@@ -7,6 +7,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,9 +18,10 @@ public class Registration_Activity extends AppCompatActivity implements View.OnC
     String login, password,repass;
     String code_pass;
     Matcher matcher;
-    public static final Pattern pattern_email = Pattern.compile("[a-zA-Z]{1}[a-zA-Z\\d\\u002E\\u005F]+@([a-zA-Z]+\\u002E){1,2}((net)|(com)|(org))");
-    public static final Pattern pattern_login = Pattern.compile("^[a-z0-9_-]{3,15}$");
-    public static final Pattern pattern_password = Pattern.compile("^[a-z0-9_-]{3,15}$");
+    TextView error_text;
+    public static final Pattern pattern_email = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+    public static final Pattern pattern_login = Pattern.compile("^[_A-Za-z0-9_-]{3,15}$");
+    public static final Pattern pattern_password = Pattern.compile("^[_A-Za-z0-9_-]{3,15}$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,9 @@ public class Registration_Activity extends AppCompatActivity implements View.OnC
         inputPass= (EditText) findViewById(R.id.inputPassword);
         reinputPass= (EditText) findViewById(R.id.reinputPassword);
         submit= (Button) findViewById(R.id.btnSubmit);
-        submit.setOnClickListener(this);}
+        submit.setOnClickListener(this);
+        error_text= (TextView) findViewById(R.id.error_registration_txt);
+    }
 
     @Override
     public void onClick(View view) {
@@ -44,9 +48,14 @@ public class Registration_Activity extends AppCompatActivity implements View.OnC
                     ed.putString(login, String.valueOf(code_pass));
                     ed.commit();
                     Intent intent=new Intent(this,Login_Activity.class);
-                    startActivity(intent);}
-                else {Toast.makeText(getApplicationContext(), "This login or eMail was allready registered!!!", Toast.LENGTH_SHORT).show();}
-            }
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    error_text.setVisibility(View.VISIBLE);
+                    error_text.setText("This login or eMail was allready registered!!!");
+                    //Toast.makeText(getApplicationContext(), "This login or eMail was allready registered!!!", Toast.LENGTH_SHORT).show();}
+            };}
     }
 
     private boolean check_Login(String login){
@@ -57,17 +66,28 @@ public class Registration_Activity extends AppCompatActivity implements View.OnC
         else {matcher = pattern_login.matcher(login);
             check= matcher.matches();}
         if (check) {return true;}
-        else {Toast.makeText(getApplicationContext(), "This login or eMail isn't correct!", Toast.LENGTH_SHORT).show();
-            return false;}
-    }
+        else {
+            error_text.setVisibility(View.VISIBLE);
+            error_text.setText("This login or eMail isn't correct!");
+            //Toast.makeText(getApplicationContext(), "This login or eMail isn't correct!", Toast.LENGTH_SHORT).show();
+        }
+            return false;
+    };
+
 
    private  boolean check_Pass(String pass, String rePass){
        if (pass.equals(rePass)){
            matcher = pattern_password.matcher(pass);
            if (matcher.matches()){return true;}
-           else {Toast.makeText(getApplicationContext(), "Passwords isn't correct!", Toast.LENGTH_SHORT).show();
+           else {
+               error_text.setVisibility(View.VISIBLE);
+               error_text.setText("Passwords isn't correct!");
+               //Toast.makeText(getApplicationContext(), "Passwords isn't correct!", Toast.LENGTH_SHORT).show();
                 return  false;}}
-       else {Toast.makeText(getApplicationContext(), "Passwords aren't the same!", Toast.LENGTH_SHORT).show();
+       else {
+           error_text.setVisibility(View.VISIBLE);
+           error_text.setText("Passwords aren't the same!");
+         //  Toast.makeText(getApplicationContext(), "Passwords aren't the same!", Toast.LENGTH_SHORT).show();
            return  false;
        }
    }
